@@ -22,7 +22,7 @@ This project implements a face recognition system using React for the frontend a
 1. **Clone Repository**
 
    ```bash
-   git clone https://github.com/yourusername/face-recognition-system.git
+   git clone https://github.com/OmkarAnbhule/Object-detection-react.git
    cd face-recognition-system
     
 2. **Setup Project**
