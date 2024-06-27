@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
+import Snackbar from 'awesome-snackbar'
 
 export default function FaceRecognition() {
     const [recognizedPerson, setRecognizedPerson] = useState('')
@@ -22,6 +23,7 @@ export default function FaceRecognition() {
             .catch(err => console.error('Error accessing webcam:', err));
     };
 
+
     // Function to capture frame and send to Flask API to upload dataset
     const upload = async () => {
         if (label && file) {
@@ -30,14 +32,64 @@ export default function FaceRecognition() {
             formData.append('labels', label); // Assuming labels are set elsewhere
 
             try {
-                await axios.post('http://127.0.0.1:5000/api/upload_dataset', formData, {
+                await axios.post('/api/upload_dataset', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
-                });
+                }).then((res) => {
+                    if (res.message) {
+                        new Snackbar(`Dataset uploaded successfully!`, {
+                            position: 'bottom-center',
+                            style: {
+                                container: [
+                                    ['background', 'rgb(130, 249, 103)'],
+                                    ['border-radius', '5px'],
+                                    ['height', '50px'],
+                                    ['padding', '10px'],
+                                    ['border-radius', '20px'],
+                                    ['display', 'flex'],
+                                    ['justify-content', 'center'],
+                                ],
+                                message: [
+                                    ['color', 'black'],
+                                    ['font-size', '18px'],
+                                    ['font-weight', 'bold'],
+                                ],
+                                actionButton: [
+                                    ['color', 'white'],
+                                ],
+                            }
+                        });
+                    }
+                })
             } catch (error) {
             }
-        };
+        }
+        else {
+            new Snackbar(`Empty Fields
+                `, {
+                position: 'bottom-center',
+                style: {
+                    container: [
+                        ['background', 'rgb(246, 58, 93)'],
+                        ['border-radius', '5px'],
+                        ['height', '50px'],
+                        ['padding', '10px'],
+                        ['border-radius', '20px'],
+                        ['display', 'flex'],
+                        ['justify-content', 'center'],
+                    ],
+                    message: [
+                        ['color', '#eee'],
+                        ['font-size', '18px'],
+                        ['font-weight', 'bold']
+                    ],
+                    actionButton: [
+                        ['color', 'white'],
+                    ],
+                }
+            });
+        }
     }
 
     useEffect(() => {
@@ -62,7 +114,7 @@ export default function FaceRecognition() {
             const imageData = canvas.toDataURL('image/jpeg');
             try {
                 if (imageData.split('data:')[1] != ',') {
-                    const response = await axios.post('http://127.0.0.1:5000/api/recognize_faces', {
+                    const response = await axios.post('/api/recognize_faces', {
                         imageData
                     });
                     setRecognizedPerson(response.data);
@@ -70,7 +122,7 @@ export default function FaceRecognition() {
                         timeout = setTimeout(captureFrameAndRecognize, 10000 / 10)
                     }
                 }
-                else{
+                else {
                     timeout = setTimeout(captureFrameAndRecognize, 10000 / 10)
                 }
             } catch (error) {
