@@ -1,0 +1,135 @@
+# Ignore all .DS_Store files (Mac OS)
+.DS_Store
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environment folders
+venv/
+env/
+.venv/
+.env/
+
+# Ignore Flask instance and config files
+instance/
+config.py
+
+# Ignore secret keys and environment variables
+.env
+*.env
+
+# Ignore log files and databases
+*.log
+*.sqlite3
+*.db
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore compiled files
+*.so
+
+# Ignore static files
+/staticfiles/
+static/
+
+# Ignore media files
+/media/
+media/
+
+# Ignore Node.js modules in the client directory
+client/node_modules/
+client/.next/
+client/.nuxt/
+client/.cache/
+client/.parcel-cache/
+
+# Ignore build files
+client/build/
+client/dist/
+client/out/
+
+# Ignore Yarn files
+client/yarn-error.log
+client/yarn-debug.log
+client/.yarn/
+
+# Ignore npm logs
+client/npm-debug.log
+client/npm-error.log
+client/.npm/
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Ignore coverage reports
+coverage/
+*.cover
+*.coverage
+*.cov
+
+# Ignore Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+*.egg-info/
+lib/
+lib64/
+pip-wheel-metadata/
+
+# Ignore local configuration files
+*.local
+*.local.py
+.local.pyc
+*.sublime-project
+*.sublime-workspace
+
+# Ignore pytest cache
+.cache/
+.tox/
+.pytest_cache/
+
+# Ignore mypy cache
+.mypy_cache/
+dmypy.json
+dmypy.json.2
+
+# Ignore Sphinx documentation
+docs/_build/
+
+# Ignore coverage files
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+
+# Ignore SQLite database files
+*.sqlite3
+*.db
+
+# Ignore temporary files and folders
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Ignore environment variable configuration files
+.env.local
+.env.*.local
+
+# Ignore local Docker files
+docker-compose.override.yml

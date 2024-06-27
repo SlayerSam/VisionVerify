@@ -1,0 +1,44 @@
+#root {
+  width: 100dvw;
+  text-align: center;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+
+@keyframes wave {
+  0% {
+    box-shadow: 0 0 6px #fff, inset 0 0 6px #fff, 0 0 8px #08f, 0 0 15px #08f, 0 0 45px #08f;
+  }
+
+  25%,
+  50%,
+  75% {
+    box-shadow: 0 0 24px #fff, inset 0 0 24px #fff, 0 0 60px #08f, 0 0 180px #08f, 0 0 360px #08f;
+  }
+
+  100% {
+    box-shadow: 0 0 6px #fff, inset 0 0 6px #fff, 0 0 8px #08f, 0 0 15px #08f, 0 0 45px #08f;
+  }
+}
+
+@keyframes fade {
+  from {
+    box-shadow: 0 0 6px #fff, inset 0 0 6px #fff, 0 0 8px #08f, 0 0 15px #08f, 0 0 45px #08f;
+  }
+
+  to {
+    box-shadow: 0 0 12px #fff, inset 0 0 12px #fff, 0 0 16px #08f, 0 0 40px #08f, 0 0 90px #08f;
+  }
+}
+
+.wave-shadow {
+  animation: wave 10s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.span {
+  animation: fade 1.5s ease-in-out infinite;
+}
