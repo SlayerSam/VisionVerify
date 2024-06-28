@@ -44,7 +44,7 @@ function App() {
             animationFrameId.current = requestAnimationFrame(processVideo);
         };
         if (streaming) {
-            setInterval(requestAnimationFrame(processVideo), 1000 / 120);
+            setInterval(requestAnimationFrame(processVideo), 1000 / 90);
         }
         return () => {
             cancelAnimationFrame(animationFrameId.current);
@@ -84,33 +84,36 @@ function App() {
             const video = videoRef.current;
             if (!video) return null;
             const videoRect = video.getBoundingClientRect();
-            return (<div
-                key={prediction.detection_id}
-                className="absolute border-red-500 border-2"
-                style={{
-                    top: `${window.innerWidth <= 426 ? videoRect.height - recognizedPerson.y : recognizedPerson.y}px`,
-                    left: `${window.innerWidth <= 426 ? videoRect.width - recognizedPerson.x : recognizedPerson.x}px`,
-                    width: `${recognizedPerson.width}px`,
-                    height: `${recognizedPerson.height}px`,
-                }}
-            >
-                <span className="bg-red-500 text-white px-1">{prediction.class}</span>
-            </div>
-            )
+            return objectPredictions.map(prediction => (
+                <div
+                    key={prediction.detection_id}
+                    className="absolute border-red-500 border-2"
+                    style={{
+                        top: `${videoRect.height - prediction.y}px`,
+                        left: `${videoRect.width - prediction.x}px`,
+                        width: `${prediction.width}px`,
+                        height: `${prediction.height}px`,
+                    }}
+                >
+                    <span className="bg-red-500 text-white px-1">{prediction.class}</span>
+                </div>
+            ));
         });
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 relative p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-full p-4">
             <h1 className={`text-2xl text-black md:hidden font-bold capitalize flex items-center`}>scroll down
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25 12 21m0 0-3.75-3.75M12 21V3" />
                 </svg>
 
             </h1>
-            <div className="w-full h-screen bg-white rounded-lg shadow-lg flex items-center justify-center md:w-3/4 md:h-3/4">
-                <video ref={videoRef} className="w-full h-[500px] object-contain" />
-                {renderBoundingBoxes()}
+            <div className="w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center md:w-3/4 md:h-3/4">
+                <div className='relative'>
+                    <video ref={videoRef} className="w-full h-full object-contain" />
+                    {renderBoundingBoxes()}
+                </div>
             </div>
             <div className="mt-4 space-x-4 flex justify-center items-center flex-wrap">
                 <button

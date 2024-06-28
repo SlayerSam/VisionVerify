@@ -29,7 +29,7 @@ export default function FaceRecognition() {
         if (label && file) {
             const formData = new FormData();
             formData.append('file', file);
-            formData.append('labels', label); // Assuming labels are set elsewhere
+            formData.append('label', label);
 
             try {
                 await axios.post('/api/upload_dataset', formData, {
@@ -37,7 +37,7 @@ export default function FaceRecognition() {
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then((res) => {
-                    if (res.message) {
+                    if (res.status == 200) {
                         new Snackbar(`Dataset uploaded successfully!`, {
                             position: 'bottom-center',
                             style: {
@@ -51,7 +51,7 @@ export default function FaceRecognition() {
                                     ['justify-content', 'center'],
                                 ],
                                 message: [
-                                    ['color', 'black'],
+                                    ['color', 'darkgreen'],
                                     ['font-size', '18px'],
                                     ['font-weight', 'bold'],
                                 ],
@@ -156,8 +156,8 @@ export default function FaceRecognition() {
 
                     className="absolute border-red-500 border-2"
                     style={{
-                        top: `${window.innerWidth <= 426 ? videoRect.height - recognizedPerson.y : recognizedPerson.y}px`,
-                        left: `${window.innerWidth <= 426 ? videoRect.width - recognizedPerson.x : recognizedPerson.x}px`,
+                        top: `${window.innerWidth <= 426 ? videoRect.height / recognizedPerson.y : recognizedPerson.y}px`,
+                        left: `${window.innerWidth <= 426 ? videoRect.width / recognizedPerson.x : recognizedPerson.x}px`,
                         width: `${recognizedPerson.width}px`,
                         height: `${recognizedPerson.height}px`,
                     }}
@@ -182,9 +182,9 @@ export default function FaceRecognition() {
                     Upload Data
                 </button>
             </div>
-            <div className="w-full h-screen bg-white rounded-lg shadow-lg flex items-center justify-center md:w-3/4 md:h-3/4">
+            <div className="w-full h-full bg-white rounded-lg shadow-lg flex items-center justify-center md:w-3/4 md:h-3/4">
                 <div className='relative'>
-                    <video ref={videoRef} className="w-full h-[500px] object-contain" />
+                    <video ref={videoRef} className="w-full h-full object-contain" />
                     {renderBoundingBoxes()}
                 </div>
             </div>
