@@ -169,7 +169,7 @@ export default function FaceRecognition() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-full">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 w-full p-4">
             <div className='flex justify-center items-center w-full flex-col mb-4'>
                 <div className='flex flex-row w-full justify-center items-center flex-wrap'>
                     <input type='text' onChange={(e) => setLabel(e.target.value)} value={label} className='input w-96 p-2 m-4 border-2 bg-white text-black' placeholder='Enter your name(for label)' ></input>
@@ -182,9 +182,9 @@ export default function FaceRecognition() {
                     Upload Data
                 </button>
             </div>
-            <div className="bg-white rounded-lg shadow-lg flex items-center justify-center overflow-hiddenv w-3/4 min-h-96">
-                <div className='relative bg-black'>
-                    <video ref={videoRef} className="relative" />
+            <div className="w-full h-screen bg-white rounded-lg shadow-lg flex items-center justify-center md:w-3/4 md:h-3/4">
+                <div className='relative'>
+                    <video ref={videoRef} className="w-full h-[500px] object-contain" />
                     {renderBoundingBoxes()}
                 </div>
             </div>
