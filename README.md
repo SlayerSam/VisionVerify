@@ -47,3 +47,4 @@ This project implements a face recognition system using React for the frontend a
 ## Author
  - Omkar Suresh Anbhule
  - GitHub: https://github.com/OmkarAnbhule
+ - Live Demo: https://visionverify.vercel.app/
