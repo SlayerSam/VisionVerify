@@ -10,6 +10,39 @@ import time
 app = Flask(__name__, static_folder="dist", static_url_path="")
 CORS(app)
 
+# Initialize variables to hold dataset and face recognition model
+dataset_faces = []
+dataset_labels = []
+label_dict = {}
+face_recognizer = None
+
+# Load Haar Cascade Classifier for face detection
+face_cascade = cv2.CascadeClassifier(
+    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+)
+
+
+# Function to train LBPH Face Recognizer
+def train_model(faces, labels):
+    global face_recognizer
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    face_recognizer.train(
+        faces, np.array(labels, dtype=np.int32)
+    )  # Ensure labels are int32
+    return face_recognizer
+
+
+# API route to upload dataset from React frontend via file upload
+@app.route("/api/upload_dataset", methods=["POST"])
+def upload_dataset():
+    global dataset_faces, dataset_labels, label_dict, face_recognizer
+
+    file = request.files.get("file")
+    if not file:
+        return jsonify({"error": "No file uploaded"})
+
+    label = request.form.get("label")
+    if not label:
         return jsonify({"error": "No label provided"})
 
     dataset_faces = []
