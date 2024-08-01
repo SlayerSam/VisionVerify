@@ -45,6 +45,6 @@ This project implements a face recognition system using React for the frontend a
 **React** - for building the frontend user interface.
 **Flask** - for building the backend API.
 ## Author
- - Omkar Suresh Anbhule
+ - Omkar Suresh Anbhule,Satyam Kushwaha
  - GitHub: https://github.com/OmkarAnbhule
  - Live Demo: https://visionverify.vercel.app/
